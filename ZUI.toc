@@ -1,7 +1,7 @@
 ## Interface: 110002
 ## Title: ZUI
 ## Author: FancyPantsy
-## Version: 1.4
+## Version: 1.5
 ## SavedVariables: ZUIDB
 ## Defaultin_combat: enabled
 
