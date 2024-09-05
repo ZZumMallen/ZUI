@@ -1,0 +1,9 @@
+## Interface: 110000
+## Title: ZachUI
+## Author: FancyPantsy
+## Version: 1.2
+## SavedVariables: ZUIDB
+## Defaultin_combat: enabled
+
+init.lua
+main.lua
