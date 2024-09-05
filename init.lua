@@ -1,5 +1,5 @@
 local _, addon = ...
-_G["ZachUI"] = addon
+_G["ZUI"] = addon
 addon = {}
 
 
