@@ -59,7 +59,7 @@ function InitFrameChanges()
 
     GameMenuFrame:SetScale(T.scale);
     MinimapCluster:SetScale(T.scale);
-    TalkingHeadFrame:SetScale(0.5)
+    TalkingHeadFrame:SetScale(0.75)
 end
 
 function Trunc(value)
