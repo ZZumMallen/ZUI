@@ -3,7 +3,6 @@
 ## Author: FancyPantsy
 ## Version: 1.5
 ## SavedVariables: ZUIDB
-## Defaultin_combat: enabled
 
 init.lua
 main.lua
