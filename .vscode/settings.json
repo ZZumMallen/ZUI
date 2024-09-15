@@ -25,7 +25,9 @@
         "TALENTS",
         "SPELLBOOK",
         "PlayerSpellsFrameBg",
-        "TalkingHeadFrame"
+        "TalkingHeadFrame",
+        "MISS",
+        "EventTrace"
     ],
     "Lua.runtime.version": "Lua 5.1",
     "Lua.runtime.builtin": {

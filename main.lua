@@ -15,32 +15,28 @@ local defaults = {
     }
 }
 
-local function Help()
-    print("|cFFFF0000Ope|r Please enter a value between 0.5 and 2.")
-    print("Standard UI scaling is 1 (100%)")
-end
 
 SLASH_KLG1 = "/klg"
 SlashCmdList["KLG"] = function(input)
     local userInput = tonumber(input)
     if userInput then
-        T.scale = userInput
-        InitFrameChanges()
+        ZUIDB.scale = userInput
+        ChangeFrameScaling()
     else
         Help()
     end
 end
 
-function InitFrameChanges()
-    if PlayerSpellsFrame then
+function AddMapOverlay()
+    if WorldMapFrame then
         local relativeTo = T.relTo and _G[T.relTo] or UIParent
 
-        PlayerSpellsFrame:SetPoint(T.pt, relativeTo, T.relPt, T.pos.x , T.pos.y)
-        PlayerSpellsFrame:SetScale(T.scale);
-        PlayerSpellsFrame:SetMovable(true);
-        PlayerSpellsFrame:RegisterForDrag("LeftButton");
-        PlayerSpellsFrame:SetScript("OnDragStart", function(self) self:StartMoving() end);
-        PlayerSpellsFrame:SetScript("OnDragStop", function(self)
+        WorldMapFrame:SetPoint(T.pt, relativeTo, T.relPt, T.pos.x , T.pos.y)
+        WorldMapFrame:SetScale(T.scale);
+        WorldMapFrame:SetMovable(true);
+        WorldMapFrame:RegisterForDrag("LeftButton");
+        WorldMapFrame:SetScript("OnDragStart", function(self) self:StartMoving() end);
+        WorldMapFrame:SetScript("OnDragStop", function(self)
             self:StopMovingOrSizing()
             local point, relativeToFrame, relativePoint, offsetX, offsetY = self:GetPoint()
             T.pt = point
@@ -50,16 +46,19 @@ function InitFrameChanges()
             T.pos.y = offsetY
         end)
     end
+end
 
-    WorldMapFrame:SetScale(T.scale)
-    WorldMapFrame:SetMovable(true);
-    WorldMapFrame:RegisterForDrag("LeftButton");
-    WorldMapFrame:SetScript("OnDragStart", function(self) self:StartMoving() end);
-    WorldMapFrame:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
 
-    GameMenuFrame:SetScale(T.scale);
-    MinimapCluster:SetScale(T.scale);
-    TalkingHeadFrame:SetScale(0.75)
+function ChangeFrameScaling()
+    PlayerSpellsFrame:SetScale(ZUIDB.scale)
+    PlayerSpellsFrame:SetMovable(true);
+    PlayerSpellsFrame:RegisterForDrag("LeftButton");
+    PlayerSpellsFrame:SetScript("OnDragStart", function(self) self:StartMoving() end);
+    PlayerSpellsFrame:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
+
+    GameMenuFrame:SetScale(ZUIDB.scale);
+    MinimapCluster:SetScale(ZUIDB.scale);
+    TalkingHeadFrame:SetScale(ZUIDB.scale)
 end
 
 function Trunc(value)
@@ -68,24 +67,24 @@ function Trunc(value)
 end
 
 function InitMap()
-    WorldMapFrame:Show();
-    WorldMapFrame:SetScale(T.scale)
-    WorldMapFrame:Hide();
+    PlayerSpellsFrame:Show();
+    PlayerSpellsFrame:SetScale(T.scale)
+    PlayerSpellsFrame:Hide();
 end
 
 EventRegistry:RegisterCallback("PlayerSpellsFrame.SpellBookFrame.Show", function()
-    PlayerSpellsFrame:ClearAllPoints()
-    InitFrameChanges();
+    PlayerSpellsFrame:ClearAllPoints();
+    ChangeFrameScaling();
 end)
 
 EventRegistry:RegisterCallback("PlayerSpellsFrame.TalentTab.Show", function()
-    PlayerSpellsFrame:ClearAllPoints()
-    InitFrameChanges();
+    PlayerSpellsFrame:ClearAllPoints();
+    ChangeFrameScaling();
 end)
 
 EventRegistry:RegisterCallback("PlayerSpellsFrame.SpecFrame.Show", function()
-    PlayerSpellsFrame:ClearAllPoints()
-    InitFrameChanges();
+    PlayerSpellsFrame:ClearAllPoints();
+    ChangeFrameScaling();
 end)
 
 function Save()
@@ -114,7 +113,7 @@ f:SetScript("OnEvent", function(self, event, arg1, ...)
     f:UnregisterEvent("ADDON_LOADED");
     elseif event == "PLAYER_ENTERING_WORLD" then
         InitMap();
-        InitFrameChanges();
+        ChangeFrameScaling();
         f:UnregisterEvent("PLAYER_ENTERING_WORLD");
     elseif event == "PLAYER_LEAVING_WORLD" then
         Save()
