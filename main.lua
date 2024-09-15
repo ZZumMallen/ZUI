@@ -87,35 +87,35 @@ EventRegistry:RegisterCallback("PlayerSpellsFrame.SpecFrame.Show", function()
     ChangeFrameScaling();
 end)
 
-function Save()
-    ZUIDB.pt = T.pt
-    ZUIDB.relTo = T.relTo
-    ZUIDB.relPt = T.relPt
-    ZUIDB.pos.x = T.pos.x
-    ZUIDB.pos.y = T.pos.y
-    ZUIDB.scale = T.scale
-end
+-- function Save()
+--     ZUIDB.pt = T.pt
+--     ZUIDB.relTo = T.relTo
+--     ZUIDB.relPt = T.relPt
+--     ZUIDB.pos.x = T.pos.x
+--     ZUIDB.pos.y = T.pos.y
+--     ZUIDB.scale = T.scale
+-- end
 
-local f = CreateFrame("FRAME")
-f:RegisterEvent("ADDON_LOADED")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:RegisterEvent("PLAYER_LEAVING_WORLD")
-f:SetScript("OnEvent", function(self, event, arg1, ...)
-    if event == "ADDON_LOADED" and arg1 == addonName then
-    ZUIDB = ZUIDB or {}
-    T = ZUIDB
+-- local f = CreateFrame("FRAME")
+-- f:RegisterEvent("ADDON_LOADED")
+-- f:RegisterEvent("PLAYER_ENTERING_WORLD")
+-- f:RegisterEvent("PLAYER_LEAVING_WORLD")
+-- f:SetScript("OnEvent", function(self, event, arg1, ...)
+--     if event == "ADDON_LOADED" and arg1 == addonName then
+--     ZUIDB = ZUIDB or {}
+--     T = ZUIDB
 
-    for k, v in pairs(defaults) do
-        if T[k] == nil then
-            T[k] = v
-        end
-    end
-    f:UnregisterEvent("ADDON_LOADED");
-    elseif event == "PLAYER_ENTERING_WORLD" then
-        InitMap();
-        ChangeFrameScaling();
-        f:UnregisterEvent("PLAYER_ENTERING_WORLD");
-    elseif event == "PLAYER_LEAVING_WORLD" then
-        Save()
-    end
-end)
+--     for k, v in pairs(defaults) do
+--         if T[k] == nil then
+--             T[k] = v
+--         end
+--     end
+--     f:UnregisterEvent("ADDON_LOADED");
+--     elseif event == "PLAYER_ENTERING_WORLD" then
+--         InitMap();
+--         ChangeFrameScaling();
+--         f:UnregisterEvent("PLAYER_ENTERING_WORLD");
+--     elseif event == "PLAYER_LEAVING_WORLD" then
+--         Save()
+--     end
+-- end)
